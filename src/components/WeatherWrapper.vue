@@ -6,11 +6,11 @@ const store = useDefaultStore()
 
 <template>
   <div class="weather flex flex-col">
-    <div class="city flex">
+    <div class="city flex flex-col">
       <p>{{ store.weatherResponse.city.name }}</p>
-      <p>{{ dayjs.unix(store.weatherResponse.city.sunrise).format('HH:mm') }}</p>
-      <p>{{ dayjs.unix(store.weatherResponse.city.sunset).format('HH:mm') }}</p>
+      <p>Sunrise: {{ dayjs.unix(store.weatherResponse.city.sunrise).format('HH:mm') }}</p>
+      <p>Sunset: {{ dayjs.unix(store.weatherResponse.city.sunset).format('HH:mm') }}</p>
     </div>
-    <TheChart v-if="store.weatherResponse"/>
+    <TheChart v-if="store.weatherResponse" :key="store.key" />
   </div>
 </template>

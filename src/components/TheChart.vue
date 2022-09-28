@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { LineChart } from 'vue-chart-3'
-import { Chart, ChartData, ChartOptions, registerables } from 'chart.js'
-import { storeToRefs } from 'pinia';
+import type { ChartOptions } from 'chart.js'
+import { Chart, ChartData, registerables } from 'chart.js'
+import { storeToRefs } from 'pinia'
 const store = storeToRefs(useDefaultStore())
 
 Chart.register(...registerables)
-const data = ref(store.weatherData);
+const data = ref(store.weatherData)
 
 const options = ref<ChartOptions<'doughnut'>>({
   responsive: true,
@@ -13,32 +14,28 @@ const options = ref<ChartOptions<'doughnut'>>({
     legend: {
       position: 'top',
     },
-    title: {
-      display: true,
-      text: 'Chart.js Doughnut Chart',
-    },
   },
-});
+})
 
 const testData = {
-  labels: data.value.time,
+  labels: data.value?.time,
   datasets: [{
     label: 'Temperature',
-    data: data.value.temp,
+    data: data.value?.temp,
     borderColor: 'rgb(192, 75, 75)',
   }, {
     label: 'Wind',
-    data: data.value.wind,
+    data: data.value?.wind,
     borderColor: 'rgb(75, 192, 192)',
   },
   {
-    label: 'Opady deszczu',
-    data: data.value.rain,
+    label: 'Rain',
+    data: data.value?.rain,
+    borderColor: 'rgb(75, 0, 192)',
   }],
 }
-
 </script>
 
 <template>
-  <LineChart :chart-data="testData" :options="options"/>
+  <LineChart :chart-data="testData" :options="options" />
 </template>
