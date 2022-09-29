@@ -25,7 +25,7 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 <template>
   <div class="button">
     <button id="myBtn" type="button" @click="store.getCoordinates()">
-      Search City
+      Localize
     </button>
   </div>
 </template>
