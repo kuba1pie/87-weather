@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
-import type { Root } from '../types'
+import type { Geo, Root } from '../types'
 
 export const useDefaultStore = defineStore('defaultStore', {
   state: () => ({
@@ -8,23 +8,47 @@ export const useDefaultStore = defineStore('defaultStore', {
     weatherResponse: {} as Root,
     key: 0 as number,
     selectedItem: null as number | null,
-    geoTarget: { latitude: '', longitude: '' }
+    geoTarget: { latitude: '' as number | string, longitude: '' as number | string },
+    geoResponse: {} as Geo,
+    error: null as any,
   }),
   actions: {
+    async getCities() {
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': import.meta.env.VITE_GEOKEY,
+          'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
+        },
+      }
+
+      fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&offset=0&namePrefix=${this.inputValue}&types=CITY`, options)
+        .then((response) => {
+          if (!response.ok)
+            this.error = 'response error'
+
+          return response.json()
+        }).then(response => this.geoResponse = response)
+        .catch(err => console.error(err))
+    },
     async getWeather() {
       fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.inputValue}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
         .then(response => response.json())
         .then(response => this.weatherResponse = response)
-        .catch(err => console.error(err))
+        .then(this.check)
+        .catch(err => this.error(err))
       this.key++
+    },
+    check() {
+      if (this.weatherResponse.cod === '404')
+        this.getCities()
     },
     async getCoordinates() {
       fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
         .then(response => response.json())
         .then(response => this.weatherResponse = response)
-        .catch(err => console.error(err))
+        .catch(err => this.error(err))
       this.key++
-      this.inputValue = this.weatherResponse.city.name
     },
   },
   getters: {

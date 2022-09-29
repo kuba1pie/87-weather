@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheGeolocationButton from './TheGeolocationButton.vue';
 const store = useDefaultStore()
 
 onMounted(() => {
@@ -21,6 +20,5 @@ onMounted(() => {
     <button id="myBtn" type="button" @click="store.getWeather">
       Search City
     </button>
-    <TheGeolocationButton/>
   </div>
 </template>

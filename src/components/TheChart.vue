@@ -42,7 +42,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="weather__chart w-100vw">
-    <canvas id="weatherChart" />
+  <div class="weather__chart w-100vw max-h-lg">
+    <canvas id="weatherChart" class="w-100vw max-h-lg" />
   </div>
 </template>
