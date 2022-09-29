@@ -8,6 +8,7 @@ export const useDefaultStore = defineStore('defaultStore', {
     weatherResponse: {} as Root,
     key: 0 as number,
     selectedItem: null as number | null,
+    geoTarget: { latitude: '', longitude: '' }
   }),
   actions: {
     async getWeather() {
@@ -16,6 +17,14 @@ export const useDefaultStore = defineStore('defaultStore', {
         .then(response => this.weatherResponse = response)
         .catch(err => console.error(err))
       this.key++
+    },
+    async getCoordinates() {
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=7dad8cf33ec0011e1ad263a2640edc2a`)
+        .then(response => response.json())
+        .then(response => this.weatherResponse = response)
+        .catch(err => console.error(err))
+      this.key++
+
     },
   },
   getters: {
