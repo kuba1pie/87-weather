@@ -10,6 +10,7 @@ function success(pos:any) {
   const crd = pos.coords;
   store.geoTarget.latitude= crd.latitude
   store.geoTarget.longitude = crd.longitude
+  store.getCoordinates()
 }
 function error(err:any) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
