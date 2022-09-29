@@ -1,14 +1,13 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
-import type { Daum, Geo, Root } from '../types'
+import type { Root } from '../types'
 
 export const useDefaultStore = defineStore('defaultStore', {
   state: () => ({
     inputValue: 'Warsaw' as string,
-    geoResponse: {} as Geo,
-    geoTarget: {} as Daum,
     weatherResponse: {} as Root,
     key: 0 as number,
+    selectedItem: null as number | null,
   }),
   actions: {
     async getWeather() {
@@ -23,10 +22,10 @@ export const useDefaultStore = defineStore('defaultStore', {
     weatherData(state) {
       if (this.weatherResponse.cod === '200') {
         const weatherObj = {
-          temp: state.weatherResponse.list.map(i => i.main.temp) as string | any,
+          temp: state.weatherResponse.list.map(i => i.main.temp) as number[] | any,
           rain: state.weatherResponse.list.map(num => num.rain?.['3h']),
           wind: state.weatherResponse.list.map(num => num.wind.speed),
-          time: state.weatherResponse.list.map(num => dayjs.unix(num.dt).format('HH:mm')),
+          time: state.weatherResponse.list.map(num => dayjs.unix(num.dt).format('dd HH:mm')),
         }
 
         return weatherObj

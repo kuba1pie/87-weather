@@ -1,41 +1,48 @@
 <script setup lang="ts">
-import { LineChart } from 'vue-chart-3'
-import type { ChartOptions } from 'chart.js'
-import { Chart, ChartData, registerables } from 'chart.js'
-import { storeToRefs } from 'pinia'
-const store = storeToRefs(useDefaultStore())
+import { Chart, registerables } from 'chart.js'
+const store = useDefaultStore()
 
 Chart.register(...registerables)
-const data = ref(store.weatherData)
-
-const options = ref<ChartOptions<'doughnut'>>({
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top',
+onMounted(() => {
+  const ctx = document.getElementById('weatherChart') as HTMLCanvasElement
+  new Chart(ctx, { // eslint-disable-line no-new
+    data: {
+      labels: store.weatherData?.time,
+      datasets: [{
+        data: store.weatherData?.temp,
+        borderColor: 'red',
+        hoverBackgroundColor: 'grey',
+        label: 'Temperature',
+        type: 'line',
+        fill: false,
+      }, {
+        data: store.weatherData?.wind,
+        borderColor: 'green',
+        label: 'Wind',
+        type: 'line',
+        fill: false,
+      }, {
+        data: store.weatherData?.rain,
+        borderColor: 'blue',
+        label: 'Rain',
+        type: 'bar',
+      }],
     },
-  },
+    options: {
+      responsive: true,
+      onClick: (event, elements) => {
+        if (elements[0]) {
+          const i = elements[0].index
+          store.selectedItem = i
+        }
+      },
+    },
+  })
 })
-
-const testData = {
-  labels: data.value?.time,
-  datasets: [{
-    label: 'Temperature',
-    data: data.value?.temp,
-    borderColor: 'rgb(192, 75, 75)',
-  }, {
-    label: 'Wind',
-    data: data.value?.wind,
-    borderColor: 'rgb(75, 192, 192)',
-  },
-  {
-    label: 'Rain',
-    data: data.value?.rain,
-    borderColor: 'rgb(75, 0, 192)',
-  }],
-}
 </script>
 
 <template>
-  <LineChart :chart-data="testData" :options="options" />
+  <div class="weather__chart w-100vw">
+    <canvas id="weatherChart" />
+  </div>
 </template>
