@@ -19,12 +19,12 @@ export const useDefaultStore = defineStore('defaultStore', {
       this.key++
     },
     async getCoordinates() {
-      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=7dad8cf33ec0011e1ad263a2640edc2a`)
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
         .then(response => response.json())
         .then(response => this.weatherResponse = response)
         .catch(err => console.error(err))
       this.key++
-
+      this.inputValue = this.weatherResponse.city.name
     },
   },
   getters: {

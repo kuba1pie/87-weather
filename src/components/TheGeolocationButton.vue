@@ -8,13 +8,8 @@ const options = {
 
 function success(pos:any) {
   const crd = pos.coords;
-
-  console.log('Your current position is:');
-  console.log(`Latitude : ${crd.latitude}`);
   store.geoTarget.latitude= crd.latitude
   store.geoTarget.longitude = crd.longitude
-  console.log(`Longitude: ${crd.longitude}`);
-  console.log(`More or less ${crd.accuracy} meters.`);
 }
 function error(err:any) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
