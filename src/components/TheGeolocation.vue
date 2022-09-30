@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const store = useDefaultStore()
 const options = {
   enableHighAccuracy: true,
@@ -7,15 +8,14 @@ const options = {
 }
 const show = ref(false)
 
-function success(pos: any) {
-  console.log((pos.json))
+function success(pos: GeolocationPosition) {
   const crd = pos.coords
   store.geoTarget.latitude = crd.latitude
   store.geoTarget.longitude = crd.longitude
   store.getCoordinates()
   show.value = true
 }
-function error(err: any) {
+function error(err: GeolocationPositionError) {
   console.warn(`ERROR(${err.code}): ${err.message}`)
 }
 navigator.geolocation.getCurrentPosition(success, error, options)
