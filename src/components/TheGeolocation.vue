@@ -8,6 +8,7 @@ const options = {
 const show = ref(false)
 
 function success(pos: any) {
+  console.log((pos.json))
   const crd = pos.coords
   store.geoTarget.latitude = crd.latitude
   store.geoTarget.longitude = crd.longitude
@@ -18,12 +19,11 @@ function error(err: any) {
   console.warn(`ERROR(${err.code}): ${err.message}`)
 }
 navigator.geolocation.getCurrentPosition(success, error, options)
+
 </script>
 
 <template>
-  <div v-if="show" class="button">
-    <button id="myBtn" type="button" @click="store.getCoordinates()">
-      Localize me
-    </button>
-  </div>
+  <button v-if="show" id="myBtn" type="button" @click="store.getCoordinates()">
+    Localize me
+  </button>
 </template>

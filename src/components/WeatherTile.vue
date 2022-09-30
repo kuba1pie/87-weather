@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 import type { List } from '../types'
 
 const { item } = defineProps<Props>()
-const store = useDefaultStore()
 interface Props {
   item: List
 }

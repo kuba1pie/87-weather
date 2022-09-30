@@ -10,7 +10,6 @@ export const useDefaultStore = defineStore('defaultStore', {
     selectedItem: null as number | null,
     geoTarget: { latitude: '' as number | string, longitude: '' as number | string },
     geoResponse: {} as Geo,
-    error: null as any,
   }),
   actions: {
     async getCities() {
@@ -23,12 +22,8 @@ export const useDefaultStore = defineStore('defaultStore', {
       }
 
       fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&offset=0&namePrefix=${this.inputValue}&types=CITY`, options)
-        .then((response) => {
-          if (!response.ok)
-            this.error = 'response error'
-
-          return response.json()
-        }).then(response => this.geoResponse = response)
+        .then((response) => response.json())
+        .then(response => this.geoResponse = response)
         .catch(err => console.error(err))
     },
     async getWeather() {
@@ -36,18 +31,23 @@ export const useDefaultStore = defineStore('defaultStore', {
         .then(response => response.json())
         .then(response => this.weatherResponse = response)
         .then(this.check)
-        .catch(err => this.error(err))
+        .catch(err => console.error(err))
       this.key++
     },
     check() {
-      if (this.weatherResponse.cod === '404')
+      if (this.weatherResponse.cod === '404') {
         this.getCities()
+      }
+      else {
+        (this.inputValue = this.weatherResponse.city.name)
+      }
     },
     async getCoordinates() {
       fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
         .then(response => response.json())
         .then(response => this.weatherResponse = response)
-        .catch(err => this.error(err))
+        .then(this.check)
+        .catch(err => console.log(err))
       this.key++
     },
   },
@@ -55,7 +55,7 @@ export const useDefaultStore = defineStore('defaultStore', {
     weatherData(state) {
       if (this.weatherResponse.cod === '200') {
         const weatherObj = {
-          temp: state.weatherResponse.list.map(i => i.main.temp) as number[] | any,
+          temp: state.weatherResponse.list.map(i => i.main.temp) as number[],
           rain: state.weatherResponse.list.map(num => num.rain?.['3h']),
           wind: state.weatherResponse.list.map(num => num.wind.speed),
           time: state.weatherResponse.list.map(num => dayjs.unix(num.dt).format('dd HH:mm')),

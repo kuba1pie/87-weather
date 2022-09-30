@@ -16,9 +16,16 @@ onMounted(() => {
 
 <template>
   <div class="card">
-    <input id="myInput" v-model="store.inputValue" type="text" list="cars">
-    <button id="myBtn" type="button" @click="store.getWeather">
+    <input id="myInput" class="form-input" v-model="store.inputValue" type="text">
+    <button id="myBtn" class="button" type="button" @click="store.getWeather">
       Search City
     </button>
+    <TheGeolocation />
   </div>
 </template>
+<style lang="scss" scope>
+  button{
+    font-size: 1.6em;
+    padding: 0.3em;
+  }
+</style>

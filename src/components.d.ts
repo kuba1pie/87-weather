@@ -7,14 +7,15 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    copy: typeof import('./components/TheInput copy.vue')['default']
+    copy: typeof import('./components/TheHeader copy.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TheChart: typeof import('./components/TheChart.vue')['default']
+    TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheGeolocation: typeof import('./components/TheGeolocation.vue')['default']
-    TheGeolocationButton: typeof import('./components/TheGeolocationButton.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
+    TheSelect: typeof import('./components/TheSelect.vue')['default']
     WeatherHeader: typeof import('./components/WeatherHeader.vue')['default']
     WeatherTile: typeof import('./components/WeatherTile.vue')['default']
   }

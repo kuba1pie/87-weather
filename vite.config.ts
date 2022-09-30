@@ -5,12 +5,18 @@ import Components from 'unplugin-vue-components/vite'
 import Pages from 'vite-plugin-pages'
 import Unocss from 'unocss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import { presetUno, transformerDirectives } from 'unocss'
+import presetDaisy from 'unocss-preset-daisy'
+import { presetForms } from '@julr/unocss-preset-forms'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    Unocss({ /* options */ }),
+    Unocss({
+      transformers: [transformerDirectives()],
+      presets: [presetUno(), presetDaisy(), presetForms()],
+    }),
     VitePWA(),
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({

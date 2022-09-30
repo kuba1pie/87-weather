@@ -3,6 +3,8 @@ import { createPinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
 import { createHead } from '@vueuse/head'
 import App from './App.vue'
+
+import '@kidonng/daisyui/index.css'
 import 'uno.css'
 
 import routes from '~pages'
