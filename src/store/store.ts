@@ -7,7 +7,6 @@ export const useDefaultStore = defineStore('defaultStore', {
     inputValue: 'Warsaw' as string,
     weatherResponse: {} as Root,
     key: 0 as number,
-    selectedItem: null as number | null,
     geoTarget: { latitude: '' as number | string, longitude: '' as number | string },
     geoResponse: {} as Geo,
   }),

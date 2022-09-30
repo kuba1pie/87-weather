@@ -7,9 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    copy: typeof import('./components/TheHeader copy.vue')['default']
+    copy: typeof import('./components/TheChart copy.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TheCarousel: typeof import('./components/TheCarousel.vue')['default']
     TheChart: typeof import('./components/TheChart.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
     TheGeolocation: typeof import('./components/TheGeolocation.vue')['default']

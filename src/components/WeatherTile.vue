@@ -23,10 +23,9 @@ interface Props {
     <p>{{ item.main.pressure }} hPa</p>
     <p>{{ item.main.humidity }}%</p>
     <p>{{ item.main.feels_like }}</p>
-    <p>{{ item.rain?.['3h'] }}mm</p>
+    <p>{{((item.rain?.['3h']) ? (item.rain?.['3h'] + ' mm') : '0 mm') }}</p>
     <p>{{ item.visibility }}m</p>
     <p>{{ item.wind.speed }}m/s</p>
-    <p>{{ item.weather }}%</p>
   </div>
 </template>
 

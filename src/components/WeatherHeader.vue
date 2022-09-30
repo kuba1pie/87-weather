@@ -11,7 +11,4 @@ const store = useDefaultStore()
       <p>Sunset: {{ dayjs.unix(store.weatherResponse.city.sunset).format('HH:mm') }}</p>
     </div>
   </div>
-  <div class="text-5xl">
-    Please click chart to see details
-  </div>
 </template>

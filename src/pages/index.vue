@@ -9,11 +9,9 @@ const store = useDefaultStore()
     <div class="form flex flex-row justify-center p-10">
       <TheInput />
     </div>
-
     <div class="weather flex flex-col items-center" v-if="store.weatherResponse.cod === '200'">
       <WeatherHeader />
       <TheChart :key="store.key" />
-      <WeatherTile v-if="store.selectedItem" :item="store.weatherResponse.list[store.selectedItem]" />
     </div>
     <div class="select" v-else>
       <TheSelect />
