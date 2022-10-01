@@ -21,7 +21,7 @@ export const useDefaultStore = defineStore('defaultStore', {
       }
 
       fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&offset=0&namePrefix=${this.inputValue}&types=CITY`, options)
-        .then((response) => response.json())
+        .then(response => response.json())
         .then(response => this.geoResponse = response)
         .catch(err => console.error(err))
     },
@@ -34,12 +34,11 @@ export const useDefaultStore = defineStore('defaultStore', {
       this.key++
     },
     check() {
-      if (this.weatherResponse.cod === '404') {
+      if (this.weatherResponse.cod === '404')
         this.getCities()
-      }
-      else {
+
+      else
         (this.inputValue = this.weatherResponse.city.name)
-      }
     },
     async getCoordinates() {
       fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)

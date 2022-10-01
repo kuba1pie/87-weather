@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import TheSelect from '../components/TheSelect.vue';
-const store = useDefaultStore()
+import TheSelect from '../components/TheSelect.vue'
 
+const store = useDefaultStore()
+const responseReady = computed(() => (store.weatherResponse.cod === '200'))
 </script>
 
 <template>
   <div class="v-index">
     <div class="form flex flex-row justify-center p-10">
-      <TheInput />
+      <TheForm />
     </div>
-    <div class="weather flex flex-col items-center" v-if="store.weatherResponse.cod === '200'">
+    <div v-if="responseReady" class="flex flex-col items-center">
       <WeatherHeader />
       <TheChart :key="store.key" />
     </div>
-    <div class="select" v-else>
+    <div v-else class="select flex flex-col items-center">
       <TheSelect />
     </div>
   </div>

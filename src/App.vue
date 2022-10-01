@@ -12,9 +12,3 @@ useHead({
   <TheHeader />
   <RouterView />
 </template>
-
-<style scope lang="scss">
-  body{
-    margin: 0
-  }
-</style>

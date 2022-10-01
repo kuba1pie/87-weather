@@ -15,14 +15,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="card">
-    <input id="myInput" class="form-input" v-model="store.inputValue" type="text">
+  <div class="c-theForm card w-md text-center">
+    <input id="myInput" v-model="store.inputValue" class="form-input text-center" type="text">
     <button id="myBtn" class="button" type="button" @click="store.getWeather">
       Search City
     </button>
     <TheGeolocation />
   </div>
 </template>
+
 <style lang="scss" scope>
   button{
     font-size: 1.6em;

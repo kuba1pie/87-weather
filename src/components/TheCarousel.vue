@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import WeatherTile from './WeatherTile.vue';
+import WeatherTile from './WeatherTile.vue'
+
 const store = useDefaultStore()
 </script>
 
 <template>
-  <div class="carousel max-w-lg">
-    <div :id="'slide'+index" class="carousel-item relative w-full" v-for="(item, index) in store.weatherResponse.list"
-      :key="item.dt">
+  <div class="c-theCarousel carousel max-w-lg">
+    <div
+      v-for="(item, index) in store.weatherResponse.list" :id="`slide${index}`"
+      :key="item.dt" class="carousel-item relative w-full flex justify-between items-center"
+    >
+      <a :href="`#slide${index - 1}`" class="btn btn-circle">❮</a>
       <WeatherTile :item="item" />
-      <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-        <a :href="'#slide'+(index-1)" class="btn btn-circle">❮</a>
-        <a :href="'#slide'+(index+1)" class="btn btn-circle">❯</a>
-      </div>
+      <a :href="`#slide${index + 1}`" class="btn btn-circle">❯</a>
     </div>
   </div>
 </template>

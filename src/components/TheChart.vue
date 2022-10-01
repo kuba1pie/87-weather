@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Chart, registerables } from 'chart.js'
+
 const store = useDefaultStore()
 
 Chart.register(...registerables)
@@ -33,7 +34,7 @@ onMounted(() => {
       onClick: (event, elements) => {
         if (elements[0]) {
           const i = elements[0].index
-          window.location.href = '#slide' + i
+          window.location.href = `#slide${i}`
         }
       },
     },
@@ -42,8 +43,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="weather__chart w-100vw max-h-lg">
+  <div class="c-theChart weather max-w-full max-h-lg">
     <canvas id="weatherChart" class="w-100vw max-h-lg" />
   </div>
-  <TheCarousel/>
+  <TheCarousel />
 </template>

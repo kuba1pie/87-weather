@@ -2,14 +2,15 @@
 import dayjs from 'dayjs'
 import type { List } from '../types'
 
-const { item } = defineProps<Props>()
 interface Props {
   item: List
 }
+
+const { item } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="weather__tile w-100 flex flex-col items-center">
+  <div class="c-weatherTile weather__tile flex flex-col items-center">
     <h3>{{ dayjs.unix(item.dt).format('DD.MM HH:mm') }}</h3>
     <p>
       {{ item.main.temp }} &#8451;
@@ -23,7 +24,7 @@ interface Props {
     <p>{{ item.main.pressure }} hPa</p>
     <p>{{ item.main.humidity }}%</p>
     <p>{{ item.main.feels_like }}</p>
-    <p>{{((item.rain?.['3h']) ? (item.rain?.['3h'] + ' mm') : '0 mm') }}</p>
+    <p>{{ (item.rain?.['3h']) ? (`${item.rain?.['3h']} mm`) : '0 mm' }}</p>
     <p>{{ item.visibility }}m</p>
     <p>{{ item.wind.speed }}m/s</p>
   </div>

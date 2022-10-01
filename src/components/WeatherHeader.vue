@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
+
 const store = useDefaultStore()
 </script>
 
 <template>
-  <div class="weather__header flex flex-col">
+  <div class="c-weatherHeader weather__header flex flex-col">
     <h2>{{ store.weatherResponse.city.name }}</h2>
     <div class="city flex flex-col">
       <p>Sunrise: {{ dayjs.unix(store.weatherResponse.city.sunrise).format('HH:mm') }}</p>

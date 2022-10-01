@@ -13,6 +13,7 @@ declare module '@vue/runtime-core' {
     TheCarousel: typeof import('./components/TheCarousel.vue')['default']
     TheChart: typeof import('./components/TheChart.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
+    TheForm: typeof import('./components/TheForm.vue')['default']
     TheGeolocation: typeof import('./components/TheGeolocation.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
     TheInput: typeof import('./components/TheInput.vue')['default']
