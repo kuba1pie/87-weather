@@ -2,7 +2,7 @@
 import TheSelect from '../components/TheSelect.vue'
 
 const store = useDefaultStore()
-const responseReady = computed(() => (store.weatherResponse.cod === '200'))
+const responseReady = computed<boolean>(() => (store.weatherResponse.cod === '200'))
 </script>
 
 <template>

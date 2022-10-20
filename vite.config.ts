@@ -17,7 +17,7 @@ export default defineConfig({
       transformers: [transformerDirectives()],
       presets: [presetUno(), presetDaisy(), presetForms()],
     }),
-    VitePWA(),
+    VitePWA({ registerType: 'autoUpdate' }),
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/head'],

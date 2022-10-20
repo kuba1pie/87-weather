@@ -6,16 +6,16 @@ const options = {
   maximumAge: 0,
 }
 const disableButton = ref(true)
-const textButton = computed(() => (disableButton.value ? 'Allow access to the location' : 'Localize me'))
+const textButton = computed<string>(() => (disableButton.value ? 'Allow access to the location' : 'Localize me'))
 
-function success(pos: GeolocationPosition) {
+function success(pos: GeolocationPosition):void {
   const crd = pos.coords
   store.geoTarget.latitude = crd.latitude
   store.geoTarget.longitude = crd.longitude
   store.getCoordinates()
   disableButton.value = false
 }
-function error(err: GeolocationPositionError) {
+function error(err: GeolocationPositionError):void {
   console.warn(`ERROR(${err.code}): ${err.message}`)
 }
 

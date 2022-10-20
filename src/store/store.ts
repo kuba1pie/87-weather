@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import dayjs from 'dayjs'
-import type { Geo, Root } from '../types'
+import type { Geo, WeatherResponse } from '../types'
 
 export const useDefaultStore = defineStore('defaultStore', {
   state: () => ({
     inputValue: 'Warsaw' as string,
-    weatherResponse: {} as Root,
+    weatherResponse: {} as WeatherResponse,
     key: 0 as number,
     geoTarget: { latitude: '' as number | string, longitude: '' as number | string },
     geoResponse: {} as Geo,
@@ -20,13 +20,13 @@ export const useDefaultStore = defineStore('defaultStore', {
         },
       }
 
-      fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&offset=0&namePrefix=${this.inputValue}&types=CITY`, options)
+      await fetch(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&offset=0&namePrefix=${this.inputValue}&types=CITY`, options)
         .then(response => response.json())
         .then(response => this.geoResponse = response)
         .catch(err => console.error(err))
     },
     async getWeather() {
-      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.inputValue}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
+      await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.inputValue}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
         .then(response => response.json())
         .then(response => this.weatherResponse = response)
         .then(this.check)
@@ -41,7 +41,7 @@ export const useDefaultStore = defineStore('defaultStore', {
         (this.inputValue = this.weatherResponse.city.name)
     },
     async getCoordinates() {
-      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
+      await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.geoTarget.latitude}&lon=${this.geoTarget.longitude}&units=metric&appid=${import.meta.env.VITE_OPENWEATHERKEY}`)
         .then(response => response.json())
         .then(response => this.weatherResponse = response)
         .then(this.check)

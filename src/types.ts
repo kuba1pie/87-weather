@@ -1,4 +1,4 @@
-export interface Root {
+export interface WeatherResponse {
   cod: string
   message: number
   cnt: number

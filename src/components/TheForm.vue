@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const store = useDefaultStore()
 
-onMounted(() => {
-  store.getWeather()
+onMounted(async () => {
+  await store.getWeather()
   const input = document.getElementById('myInput') as HTMLInputElement
   const button = document.getElementById('myBtn') as HTMLButtonElement
-  input.addEventListener('keypress', (event) => {
+  input.addEventListener('keypress', (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
       event.preventDefault()
       button.click()

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import WeatherTile from './WeatherTile.vue'
-
 const store = useDefaultStore()
 </script>
 
