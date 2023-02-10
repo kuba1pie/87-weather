@@ -39,7 +39,6 @@ const { item } = defineProps<Props>()
 .item {
   width: 5em;
   height: 5em;
-  border: 1px solid white;
   padding: 2px;
   text-align: center;
   align-content: center;
