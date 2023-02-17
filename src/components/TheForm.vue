@@ -14,6 +14,10 @@ onMounted(async () => {
 })
 </script>
 sdfsdfsdfsdfsdf
+sdfsdfsdfsdfsdf
+sdfsdfsdfsdfsdf
+sdfsdfsdfsdfsdf
+sdfsdfsdfsdfsdf
 <template>
   <div class="c-theForm card w-md text-center">
     <input id="myInput" v-model="store.inputValue" class="form-input text-center" type="text">
