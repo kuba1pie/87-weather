@@ -13,6 +13,8 @@ onMounted(async () => {
   })
 })
 </script>
+4568446
+8797897
 <template>
   <div class="c-theForm card w-md text-center">
     <input id="myInput" v-model="store.inputValue" class="form-input text-center" type="text">
